@@ -36,12 +36,14 @@ public class MergeSort
     static void merge(int arr[], int start, int mid,int end)
     {
         int start2 = mid + 1;
+       // In case already sorted.
         if (arr[mid] <= arr[start2]) 
         {
             return;
         }
         while (start <= mid && start2 <= end) 
         {
+           // If first element in correct place.
             if (arr[start] <= arr[start2]) 
             {
                 start++;
@@ -53,24 +55,27 @@ public class MergeSort
  
                 while (index != start) 
                 {
+                   // Shift all elements between 1 and 2 to the right. 
                     arr[index] = arr[index - 1];
                     index--;
                 }
                 arr[start] = value;
+               // Restart pointer values. 
                 start++;
                 mid++;
                 start2++;
             }
         }
     }
-     static void mergeSort(int arr[], int l, int r)
+     static void mergeSort(int arr[], int left, int right)
     {
-        if (l < r) 
+        if (left < right) 
         {
-            int m = l + (r - l) / 2;
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
+            int middle = left + (right - l) / 2;
+           // Sorting two halves of array. 
+            mergeSort(arr, left, middle);
+            mergeSort(arr, middle + 1, right);
+            merge(arr, left, middle, right);
         }
     }
 }
